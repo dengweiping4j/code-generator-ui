@@ -334,7 +334,6 @@ class CodeGenerate extends Component {
 
     generatorData['tables'] = filterTables;
     generatorData['dataConnectionId'] = currentDatabase;
-    generatorData.generatorType='mybatis-plus';
 
     const url = `${apiServer + getApi().generator}`;
 

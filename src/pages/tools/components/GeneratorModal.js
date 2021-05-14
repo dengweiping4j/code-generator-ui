@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Input, Modal, Spin } from 'antd';
+import { Input, Modal, Select, Spin } from 'antd';
 import EditTable from '@/components/EditTable/EditTable';
 import styles from './GeneratorModal.less';
+
+const { Option } = Select;
 
 class GeneratorModal extends Component {
 
@@ -102,6 +104,20 @@ class GeneratorModal extends Component {
             placeholder={'请填写作者姓名'}
             onChange={(e) => this.onFormChange('author', e.target.value)}
           />
+        </div>
+
+        <div className={styles['item']}>
+          <span className={styles['label']}>ORM框架：</span>
+          <Select
+            style={{ width: '100%' }}
+            placeholder={'请选择ORM框架'}
+            value={data['generatorType']}
+            onChange={value => this.onFormChange('generatorType', value)}
+          >
+            <Option value={'jpa'} key={1}>JPA</Option>
+            <Option value={'mybatis'} key={2}>MyBatis</Option>
+            <Option value={'mybatis-plus'} key={3}>MyBatis-Plus</Option>
+          </Select>
         </div>
 
         <EditTable

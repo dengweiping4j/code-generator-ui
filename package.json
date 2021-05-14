@@ -1,0 +1,52 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "test": "umi test",
+    "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.3.0",
+    "antd": "4.10.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "dva": "^2.4.1",
+    "for-editor": "^0.3.5",
+    "hash": "^0.2.1",
+    "js-cookie": "^2.2.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "qier-progress": "^1.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-loadable": "^5.5.0",
+    "react-markdown": "^5.0.3",
+    "react-syntax-highlighter": "^15.4.3",
+    "umi-request": "^1.3.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "raw-loader": "^4.0.2",
+    "react-test-renderer": "^16.7.0",
+    "umi": "^2.7.7",
+    "umi-plugin-react": "^1.8.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

@@ -1,0 +1,83 @@
+@form-item-label-color: #999;
+@red-color: #ff4d4f;
+@green-color: #52c41a;
+
+@color-1: #b1f499;
+@color-2: #fff3b0;
+@color-3: #a4d2ff;
+@color-4: #e3abff;
+@color-5: #ffb0cf;
+@color-6: #ffd7b0;
+@color-7: #7bf0da;
+
+.form {
+  width: 100%;
+}
+
+.form-item-label, .form-item-label-required {
+  color: @form-item-label-color;
+}
+
+.form-item-label-required::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: @red-color;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: '*';
+}
+
+.form-item-label-inline {
+  text-align: right;
+  width: 120px;
+}
+
+.sidebar-menu {
+  :global {
+    .ant-menu {
+      font-size: 13px !important;
+      background: none !important;
+    }
+    .ant-menu-inline > .ant-menu-item {
+      height: 30px !important;
+      line-height: 30px !important;
+    }
+    .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+      height: 30px !important;
+      line-height: 30px !important;
+    }
+    .ant-menu-sub.ant-menu-inline > .ant-menu-item {
+      height: 30px !important;
+      line-height: 30px !important;
+    }
+  }
+}
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 16px;
+    margin-bottom: 0px;
+  }
+
+  span {
+    font-size: 18px;
+  }
+}
+
+.modal-footer-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px !important;
+}

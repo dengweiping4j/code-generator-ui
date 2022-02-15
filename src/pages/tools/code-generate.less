@@ -29,7 +29,7 @@
 
 .list {
   margin-top: 20px;
-  max-height: calc(100vh - 330px);
+  height: calc(100vh - 324px);
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -44,4 +44,24 @@
 .item-selected {
   .item;
   background: #e8f0fe;
+}
+
+.tableItem {
+  display: flex;
+  flex-direction: column;
+  background: #F6F6F6;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.tableComment {
+  height: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 5px;
+}
+
+.tableName {
+  margin: 10px 5px;
 }

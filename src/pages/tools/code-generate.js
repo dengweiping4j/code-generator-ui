@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './code-generate.less';
-import { Button, Divider, Input, List, message, Table } from 'antd';
+import { Button, Input, List, message } from 'antd';
 import { connect } from 'dva';
 import DatabaseModal from '@/pages/tools/components/DatabaseModal';
 import DMessage from '@/components/Alert/DMessage';
@@ -60,10 +60,29 @@ class CodeGenerate extends Component {
       type: 'generator/getDataConnections',
       callback: response => {
         if (response && response.length > 0) {
+          this.findTables(response[0].id);
           this.setState({
             dataConnections: response,
             currentDatabase: response[0].id,
           });
+        }
+      },
+    });
+  };
+
+  findTables = currentDatabase => {
+    this.props.dispatch({
+      type: 'generator/findTables',
+      payload: {
+        dataConnectionId: currentDatabase,
+      },
+      callback: response => {
+        if (response && response.code === 'SUCCEED') {
+          this.setState({
+            tables: response.data,
+          });
+        } else {
+          message.error(response.message);
         }
       },
     });
@@ -75,30 +94,10 @@ class CodeGenerate extends Component {
     });
   };
 
-  generator = () => {
-    const { currentDatabase } = this.state;
-    if (!currentDatabase) {
-      message.error('请先选择数据源');
-      return;
-    }
-
-    this.props.dispatch({
-      type: 'generator/findTables',
-      payload: {
-        dataConnectionId: currentDatabase,
-      },
-      callback: response => {
-        if (response && response.code === 'SUCCEED') {
-          this.setState({
-            tables: response.data,
-            generatorVisible: true,
-          });
-        } else {
-          message.error(response.message);
-        }
-      },
+  generator = tableName => {
+    this.setState({
+      generatorVisible: true,
     });
-
   };
 
   openDbModal = record => {
@@ -351,11 +350,9 @@ class CodeGenerate extends Component {
     })
       .then(res => res.blob())
       .then(blob => {
-
         this.setState({
           loading: false,
         });
-
         const a = document.createElement('a');
         const url = window.URL.createObjectURL(blob);
         a.href = url;
@@ -384,77 +381,6 @@ class CodeGenerate extends Component {
       testLoading,
       generatorData,
     } = this.state;
-
-    const data = [
-      {
-        project: '大数据治理平台',
-        package: 'com.bigdata',
-        author: '邓卫平',
-        datasource: '测试数据源(192.168.11.59/datag)',
-        table: 'aaa_dwp_test1',
-      },
-      {
-        project: '大数据治理平台',
-        package: 'com.bigdata',
-        author: '邓卫平',
-        datasource: '测试数据源(192.168.11.59/datag)',
-        table: 'aaa_dwp_test1',
-      },
-      {
-        project: '大数据治理平台',
-        package: 'com.bigdata',
-        author: '邓卫平',
-        datasource: '测试数据源(192.168.11.59/datag)',
-        table: 'aaa_dwp_test1',
-      },
-      {
-        project: '大数据治理平台',
-        package: 'com.bigdata',
-        author: '邓卫平',
-        datasource: '测试数据源(192.168.11.59/datag)',
-        table: 'aaa_dwp_test1',
-      },
-    ];
-
-    const columns = [
-      {
-        title: '序号',
-        dataIndex: 'sn',
-        key: 'sn',
-        render: (text, record, index) => index + 1,
-      },
-      {
-        title: '项目名称',
-        dataIndex: 'project',
-        key: 'project',
-      },
-      {
-        title: '包名',
-        dataIndex: 'package',
-        key: 'package',
-      },
-      {
-        title: '作者',
-        dataIndex: 'author',
-        key: 'author',
-      },
-      {
-        title: '数据源',
-        dataIndex: 'datasource',
-        key: 'datasource',
-      },
-      {
-        title: '实体表',
-        dataIndex: 'table',
-        key: 'table',
-      },
-      {
-        title: '操作',
-        dataIndex: 'action',
-        key: 'action',
-        render: (text, record) => <a>查看</a>,
-      },
-    ];
 
     return <div style={{ width: '100%', display: 'flex' }}>
       <div className={styles['left']}>
@@ -500,17 +426,21 @@ class CodeGenerate extends Component {
         </div>
       </div>
 
-      <Divider type={'vertical'} className={styles['divider']} />
-
       <div className={styles['right']}>
-        <Button type={'primary'} onClick={this.generator}>快速生成</Button>
-
-        <div style={{ marginTop: '20px' }}><h3>历史记录：</h3></div>
-        <Table
-          rowKey={'sn'}
-          style={{ marginTop: '5px' }}
-          dataSource={data}
-          columns={columns}
+        <List
+          grid={{ gutter: 16, column: 4 }}
+          dataSource={tables}
+          renderItem={(item, index) => (
+            <List.Item
+              key={index}
+            >
+              <div className={styles['tableItem']} onClick={() => this.generator(item.tableName)}>
+                <img src={'images/db/mysql.svg'} />
+                <span className={styles['tableComment']}>{item.tableComment}</span>
+                <span className={styles['tableName']}>{item.tableName}</span>
+              </div>
+            </List.Item>
+          )}
         />
       </div>
 

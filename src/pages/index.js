@@ -403,7 +403,6 @@ class CodeGenerate extends Component {
         renderItem={(item, index) => (
           <List.Item
             key={index}
-            className={item.id === currentDatabase ? styles['item-selected'] : styles['item']}
           >
             <div onClick={() => this.databaseChange(item.id)} className={styles['item']}>
               <div className={styles['title']}>{item.name}</div>

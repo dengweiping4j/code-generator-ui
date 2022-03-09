@@ -8,6 +8,7 @@ import GeneratorModal from '@/pages/components/GeneratorModal';
 import { apiServer } from '@/utils/constants';
 import { getApi } from './services/services';
 
+
 const { Search } = Input;
 
 @connect(({ generator }) => ({
@@ -405,7 +406,9 @@ class CodeGenerate extends Component {
             key={index}
           >
             <div onClick={() => this.databaseChange(item.id)} className={styles['item']}>
-              <div className={styles['title']}>{item.name}</div>
+              <div className={styles['title']}>
+                <span>{item.name}</span>
+              </div>
               <div>{`${item.ip}/${item.database}`}</div>
             </div>
           </List.Item>

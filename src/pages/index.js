@@ -407,7 +407,7 @@ class CodeGenerate extends Component {
           >
             <div className={styles['item']}>
               <div>
-                <span className={styles['title']} onClick={() => this.databaseChange(item.id)}>{item.name}</span>
+                <span title={'一键生成代码'} className={styles['title']} onClick={() => this.databaseChange(item.id)}>{item.name}</span>
                 <span className={styles['update']} onClick={() => this.openDbModal(item)}>修改</span>
               </div>
               <div>{`${item.ip}/${item.database}`}</div>

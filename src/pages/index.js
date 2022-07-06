@@ -405,9 +405,10 @@ class CodeGenerate extends Component {
           <List.Item
             key={index}
           >
-            <div onClick={() => this.databaseChange(item.id)} className={styles['item']}>
-              <div className={styles['title']}>
-                <span>{item.name}</span>
+            <div className={styles['item']}>
+              <div>
+                <span className={styles['title']} onClick={() => this.databaseChange(item.id)}>{item.name}</span>
+                <span className={styles['update']} onClick={() => this.openDbModal(item)}>修改</span>
               </div>
               <div>{`${item.ip}/${item.database}`}</div>
             </div>
